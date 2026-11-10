@@ -5,9 +5,9 @@ on:
 
 env:
   AWS_REGION: ap-south-1
-  ECR_REGISTRY: 175157388210.dkr.ecr.ap-south-1.amazonaws.com
+  ECR_REGISTRY: 426499248959.dkr.ecr.ap-south-1.amazonaws.com
   ECR_REPOSITORY: devops-node-app
-  EKS_CLUSTER: practice-eks
+  EKS_CLUSTER: demo-eks-cluster
 
 jobs:
   build:
