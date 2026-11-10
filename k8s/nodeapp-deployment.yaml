@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-node-app
+  labels:
+    app: devops-node-app
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-node-app
+  template:
+    metadata:
+      labels:
+        app: devops-node-app
+    spec: 
+      containers:
+      - name: devops-node-app
+        image: 175157388210.dkr.ecr.ap-south-1.amazonaws.com/devops-node-app:latest
+        ports:
+          - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-node-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-node-app
+  ports:
+    - port: 80
+      targetPort: 3000
