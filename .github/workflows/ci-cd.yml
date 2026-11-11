@@ -61,6 +61,10 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=prashanthvenukonti
+            -Dsonar.projectKey=prashanthvenukonti_nodejsproject-eveningbatch-prod
       
   docker:
     runs-on: ubuntu-latest
