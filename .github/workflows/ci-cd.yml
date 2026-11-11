@@ -108,12 +108,17 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-           aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Check AWS Identity
+        run: aws sts get-caller-identity
+
       - name: Connect using kubectl to EKS
         run: |
           aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER
+
       - name: Deploy to EKS
         run: kubectl apply -f k8s/nodeapp-deployment.yaml
 
@@ -123,7 +128,6 @@ jobs:
           kubectl get svc devops-node-app
           HOST=$(kubectl get svc devops-node-app -o jsonpath='{.status.loadbalancer.ingress[0].hostname}')
           echo "App URL: http://$HOST"
-        
       
 
 
